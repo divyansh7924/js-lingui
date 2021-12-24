@@ -214,8 +214,8 @@ export class I18n extends EventEmitter<Events> {
 
     return interpolate(
       translation,
-      this.locale,
-      this.locales,
+      this._locale,
+      this._locales,
       this.localeData
     )(values, formats)
   }
