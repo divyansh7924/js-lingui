@@ -78,9 +78,19 @@ describe("I18n", function () {
         messages: {
           en: {
             Hello: "Hello",
+            "Someone new is offering for {0}! Make Offer now!": [
+              "Someone new is offering for ",
+              ["0"],
+              "! Make Offer now!",
+            ],
           },
           es: {
             Hello: "Hola",
+            "Someone new is offering for {0}! Make Offer now!": [
+              "Harga penawaran terbaru untuk ",
+              ["0"],
+              "! BUAT TAWARAN SEKARANG!",
+            ],
           },
         },
         localeData: {
@@ -89,10 +99,16 @@ describe("I18n", function () {
         },
       })
 
+      const name = "X Item"
+
       i18n.activate("en")
-      expect(i18n._("Hello")).toEqual("Hello")
+      const en = i18n._(`Someone new is offering for ${name}! Make Offer now!`)
       i18n.activate("es")
-      expect(i18n._("Hello")).toEqual("Hola")
+      const es = i18n._(`Someone new is offering for ${name}! Make Offer now!`)
+      expect(en).toEqual(`Someone new is offering for ${name}! Make Offer now!`)
+      expect(es).toEqual(
+        `Harga penawaran terbaru untuk ${name}! BUAT TAWARAN SEKARANG!`
+      )
     })
 
     it("should switch active locale", () => {
